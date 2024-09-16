@@ -30,9 +30,8 @@ const Login = () => {
     setError("");
 
     try {
-      console.log("Sending login request with data:", formData);
       const response = await axios.post(
-        `https://sporting-3.onrender.com/api/v1/auth/login`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`, // Use environment variable for base URL
         formData,
         {
           headers: {
@@ -41,12 +40,9 @@ const Login = () => {
         }
       );
 
-      console.log("Login response:", response);
-
       if (response.status === 200) {
         alert("An OTP has been sent to your mail");
-        // Navigate to OTP Page
-        navigate("/otp");
+        navigate("/otp"); // Navigate to OTP Page
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -76,7 +72,7 @@ const Login = () => {
             </h3>
             <div className="text-[14px] lg:text-[16px] leading-6 lg:leading-7 text-center lg:text-left">
               <span>
-                If you don't have an account register, you can{" "}
+                If you don't have an account, you can{" "}
                 <Link to="/register">
                   <span className="text-blue-600">Register here!</span>
                 </Link>
@@ -174,7 +170,7 @@ const Login = () => {
                 <img
                   src={GoogleIcon}
                   alt="Google"
-                  className="w-[40px] cursor-pointer "
+                  className="w-[40px] cursor-pointer"
                   style={{ borderRadius: "50%", marginTop: "-4.5px" }}
                 />
               </div>
