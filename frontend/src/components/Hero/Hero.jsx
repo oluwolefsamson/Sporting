@@ -4,7 +4,7 @@ import Hero2 from "../../assets/images/hero2.png";
 
 export default function Hero() {
   return (
-    <div className="bg-white relative">
+    <div className="bg-white relative mt-[200px]">
       {/* Make the container relative for absolute positioning */}
       <div
         className="rounded relative isolate px-6 py-3 align-center justify-center bg-blue-50 mx-11 lg:px-8 h-auto sm:h-auto lg:h-[800px]"
