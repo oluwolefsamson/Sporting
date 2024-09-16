@@ -1,26 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios"; // Make sure axios is imported
 import SignupImg from "../../src/assets/images/reg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { MdEmail, MdPerson } from "react-icons/md";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdLockOpen, MdLock } from "react-icons/md";
 import Logo from "../assets/images/logo.png";
 
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
+    name: "",
     password: "",
     confirmPassword: "",
-    photo: "",
-    role: "patient",
-    address: "",
-    phone: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -59,7 +56,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `https://mernstackdoctorbooking.onrender.com/api/v1/auth/register`,
+        `http://localhost:8000/api/v1/auth/register`, // Ensure correct backend URL
         formData,
         {
           headers: {
@@ -73,6 +70,7 @@ const Register = () => {
         navigate("/login");
       }
     } catch (error) {
+      console.error("Error during registration: ", error);
       if (error.response) {
         if (error.response.status === 409) {
           navigate("/login");
@@ -91,26 +89,16 @@ const Register = () => {
 
   return (
     <section className="px-5 py-6 lg:py-8">
-      {" "}
-      {/* Reduced padding top and bottom */}
       <div className="max-w-[1170px] px-6 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Form Container */}
           <div className="flex flex-col items-center lg:items-start gap-5 lg:gap-6 py-6 lg:py-8 lg:pr-16">
-            {" "}
-            {/* Reduced gap and padding */}
-            <img
-              src={Logo}
-              alt="Logo"
-              className="w-[150px] hidden lg:block"
-            />{" "}
-            {/* Hidden on small screens */}
+            <img src={Logo} alt="Logo" className="w-[150px] hidden lg:block" />
             <h3 className="text-gray-900 text-[36px] lg:text-[42px] leading-9 font-bold text-center lg:text-left">
               Sign Up
             </h3>
             <div className="text-[14px] lg:text-[16px] leading-6 lg:leading-7 text-center lg:text-left">
               <span>
-                If you already have an account register, you can{" "}
+                If you already have an account, you can{" "}
                 <Link to="/login">
                   <span className="text-blue-600">Login here</span>
                 </Link>
@@ -118,8 +106,6 @@ const Register = () => {
             </div>
             <form onSubmit={submitHandler} className="w-full max-w-md">
               <div className="mb-4 lg:mb-5 relative">
-                {" "}
-                {/* Reduced bottom margin */}
                 <MdEmail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   type="email"
@@ -133,8 +119,6 @@ const Register = () => {
                 />
               </div>
               <div className="mb-4 lg:mb-5 relative">
-                {" "}
-                {/* Reduced bottom margin */}
                 <MdPerson className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   type="text"
@@ -147,10 +131,7 @@ const Register = () => {
                   autoComplete="name"
                 />
               </div>
-
               <div className="mb-4 lg:mb-5 relative">
-                {" "}
-                {/* Reduced bottom margin */}
                 <MdLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -174,8 +155,6 @@ const Register = () => {
                 </div>
               </div>
               <div className="mb-4 lg:mb-5 relative">
-                {" "}
-                {/* Reduced bottom margin */}
                 <MdLockOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   type={showConfirmPassword ? "text" : "password"}
@@ -204,8 +183,6 @@ const Register = () => {
                 </div>
               )}
               <div className="mb-4 lg:mb-5">
-                {" "}
-                {/* Reduced bottom margin */}
                 <button
                   type="submit"
                   className="w-full py-3 bg-primaryColor bg-blue-600 text-white text-[14px] lg:text-[16px] leading-6 lg:leading-7 rounded-lg"
@@ -220,7 +197,6 @@ const Register = () => {
               </div>
             </form>
           </div>
-          {/* Image Container */}
           <div className="hidden lg:block bg-primaryColor rounded-l-lg">
             <figure className="rounded-l-lg">
               <img

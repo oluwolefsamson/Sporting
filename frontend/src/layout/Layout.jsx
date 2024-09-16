@@ -9,9 +9,12 @@ const Layout = () => {
   const location = useLocation();
 
   // Check if the current path matches any route where Header and Footer should be hidden
-  const shouldHideHeaderFooter = ["/login", "/register"].some((path) =>
-    location.pathname.startsWith(path)
-  );
+  const shouldHideHeaderFooter = [
+    "/login",
+    "/register",
+    "/otp",
+    "/dashboard",
+  ].some((path) => location.pathname.startsWith(path));
 
   console.log("Should hide Header/Footer:", shouldHideHeaderFooter);
   console.log("Current path:", location.pathname);
