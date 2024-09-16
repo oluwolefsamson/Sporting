@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="flex flex-col bg-black py-11 px-[100px] min-h-screen">
+    <div className="flex flex-col bg-black py-11 px-4 sm:px-6 md:px-[100px] min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
         <div className="pb-4">
           <h1 className="text-2xl font-bold mb-4 text-gray-300">
@@ -30,10 +30,10 @@ const Footer = () => {
       {/* First border */}
       <div className="border-t border-gray-900 my-11 md:my-8"></div>
 
-      {/* 5-Column Footer Listing Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 text-gray-300">
+      {/* 5-Column Footer Listing Section - Flex wrapping for small screens */}
+      <div className="flex flex-wrap gap-8 text-gray-300">
         {/* Column 1 */}
-        <div>
+        <div className="flex-1 min-w-[150px]">
           <h2 className="text-lg font-bold mb-4">Quick Link</h2>
           <ul className="space-y-2">
             <li>About Us</li>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         {/* Column 2 */}
-        <div>
+        <div className="flex-1 min-w-[150px]">
           <h2 className="text-lg font-bold mb-4">Services</h2>
           <ul className="space-y-2">
             <li>Consulting</li>
@@ -55,7 +55,7 @@ const Footer = () => {
         </div>
 
         {/* Column 3 */}
-        <div>
+        <div className="flex-1 min-w-[150px]">
           <h2 className="text-lg font-bold mb-4">Resources</h2>
           <ul className="space-y-2">
             <li>Documentation</li>
@@ -66,7 +66,7 @@ const Footer = () => {
         </div>
 
         {/* Column 4 */}
-        <div>
+        <div className="flex-1 min-w-[150px]">
           <h2 className="text-lg font-bold mb-4">Services</h2>
           <ul className="space-y-2">
             <li>Support</li>
@@ -77,7 +77,7 @@ const Footer = () => {
         </div>
 
         {/* Column 5 */}
-        <div>
+        <div className="flex-1 min-w-[150px]">
           <h2 className="text-lg font-bold mb-4">Legal</h2>
           <ul className="space-y-2">
             <li>Privacy Policy</li>
