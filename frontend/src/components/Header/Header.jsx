@@ -1,32 +1,13 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-
+import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/images/logo.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white fixed-header">
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -47,11 +28,8 @@ export default function Header() {
             <Bars3Icon aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
-        <PopoverGroup className="hidden lg:flex lg:gap-x-12 ">
-          <a
-            href="#"
-            className="text-lg font-semibold leading-6 text-gray-900 "
-          >
+        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
             Home
           </a>
           <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
@@ -62,7 +40,7 @@ export default function Header() {
           </a>
           <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
             Blog
-          </a>{" "}
+          </a>
           <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
             Contact
           </a>
@@ -78,14 +56,13 @@ export default function Header() {
       </nav>
       <Dialog
         open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
         className="lg:hidden"
       >
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              {/* <span className="sr-only">Your Company</span> */}
               <img alt="" src={Logo} className="h-20 w-30" />
             </a>
             <button
