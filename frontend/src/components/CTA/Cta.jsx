@@ -6,7 +6,7 @@ const Cta = () => {
   return (
     <div className="flex justify-center px-4 py-8">
       <div
-        className="flex flex-col gap-4 bg-blue-900 rounded-lg p-6 md:p-10 w-full lg:w-full"
+        className="flex flex-col gap-4 bg-blue-700 rounded-lg p-6 md:p-10 w-full lg:w-full"
         style={{ borderRadius: "20px" }}
       >
         <div>

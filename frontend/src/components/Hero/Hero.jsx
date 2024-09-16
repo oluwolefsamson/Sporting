@@ -17,7 +17,12 @@ export default function Hero() {
             </div>
           </div>
           <div className="text-center relative">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1
+              className="text-4xl font-bold tracking-tight  text-gray-900 sm:text-6xl"
+              style={{
+                lineHeight: "70px",
+              }}
+            >
               The Hidden Tool Smart Bettors Use to Outsmart The Bookmakers
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -49,7 +54,7 @@ export default function Hero() {
                   src={HeroImg}
                   alt="Hero"
                   style={{
-                    height: "450px",
+                    height: "428px",
                     width: "auto", // Ensure it maintains aspect ratio
                   }}
                 />
