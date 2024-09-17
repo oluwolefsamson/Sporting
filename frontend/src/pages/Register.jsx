@@ -56,7 +56,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/v1/auth/register`, // Ensure the backend URL is correct
+        `https://sporting.onrender.com/api/v1/auth/register`, // Ensure the backend URL is correct
         formData,
         {
           headers: {

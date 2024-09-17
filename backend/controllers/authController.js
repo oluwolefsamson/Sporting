@@ -27,7 +27,7 @@ export const register = async (req, res) => {
     // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const verificationCode = Math.floor(900 + Math.random() * 900).toString();
+    const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
 
     // Create new user
     const newUser = new User({
