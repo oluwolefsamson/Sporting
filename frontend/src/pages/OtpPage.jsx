@@ -42,7 +42,7 @@ const OtpPage = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:8000/api/v1/auth/verifyemail`,
+        `https://sporting.onrender.com/api/v1/auth/verifyemail`,
         {
           code: otpCode,
         }
@@ -97,7 +97,7 @@ const OtpPage = () => {
   };
 
   return (
-    <section className="px-5 py-6 lg:py-8">
+    <section className="bg-gray-50 px-5 py-6 lg:py-8 h-screen flex items-center">
       <div className="max-w-[1170px] px-6 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Form Container */}
@@ -119,7 +119,7 @@ const OtpPage = () => {
                     maxLength="1"
                     value={digit}
                     onChange={(e) => handleChange(e.target.value, index)}
-                    className="w-12 h-12 lg:w-16 lg:h-16 text-center border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-xl font-medium"
+                    className="w-12 h-12 lg:w-16 lg:h-16 text-center border-b-2 bg-gray-50 border-blue-300 focus:outline-none focus:border-blue-500 text-xl font-medium"
                   />
                 ))}
               </div>
@@ -130,7 +130,7 @@ const OtpPage = () => {
               </div>
 
               {/* Resend Code Section */}
-              <div className="text-center text-gray-600 text-[14px] lg:text-[16px] mb-7">
+              <div className=" text-gray-600 text-[14px] lg:text-[16px] mb-7">
                 Didn't get a code?{" "}
                 <button
                   onClick={resendOtp}

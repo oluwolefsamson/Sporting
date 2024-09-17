@@ -61,7 +61,7 @@ const Login = () => {
   };
 
   return (
-    <section className="px-5 py-6 lg:py-8">
+    <section className="bg-gray-50 px-5 py-6 lg:py-8 h-screen flex items-center">
       <div className="max-w-[1170px] px-6 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Form Container */}
