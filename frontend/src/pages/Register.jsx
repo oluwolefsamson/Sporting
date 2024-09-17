@@ -69,7 +69,7 @@ const Register = () => {
 
       if (response.status === 201) {
         alert("User created successfully.");
-        navigate("/login");
+        navigate("/otp");
       }
     } catch (error) {
       console.error("Error during registration: ", error);
@@ -77,9 +77,9 @@ const Register = () => {
         if (error.response.status === 409) {
           navigate("/login");
         } else if (error.response.status === 400) {
-          setError("User already exists. Please log in.");
+          alert("User already exists. Please log in");
         } else {
-          setError("An error occurred. Please try again later.");
+          alert("An error occurred. Please try again later.");
         }
       } else {
         setError("An error occurred. Please try again later.");

@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8000;
 const corsOptions = {
   origin: [
     process.env.FRONTEND_URL || "http://localhost:5173",
-    "https://sporting-omega.vercel.app",
+    "https://sporting.onrender.com",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,

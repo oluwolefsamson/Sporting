@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { HashLoader } from "react-spinners";
 import Logo from "../assets/images/logo.png";
 import LoginImg from "../assets/images/login.png";
@@ -9,7 +10,7 @@ const OtpPage = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [timer, setTimer] = useState(180); // 3 minutes timer (in seconds)
+  const [timer, setTimer] = useState(30); // 30 seconds timer
   const [resendDisabled, setResendDisabled] = useState(true);
 
   useEffect(() => {
@@ -34,29 +35,63 @@ const OtpPage = () => {
     }
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const otpCode = otp.join(""); // Combine OTP digits into a single string
 
-    console.log("Submitted OTP:", otpCode);
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        `http://localhost:8000/api/v1/auth/verifyemail`,
+        {
+          code: otpCode,
+        }
+      );
 
-    // Simulate successful verification
-    if (otpCode === "1234") {
-      alert("OTP Verified!");
-      navigate("/dashboard");
-    } else {
-      alert("Invalid OTP, please try again.");
+      if (response.data.success) {
+        alert("OTP is Successfully Verified!");
+        navigate("/login");
+      } else {
+        alert("Invalid OTP, please try again");
+        setError(response.data.message || "Invalid OTP, please try again.");
+      }
+    } catch (error) {
+      alert("There was an error verifying the OTP. Please try again");
+      setError("There was an error verifying the OTP. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const resendOtp = () => {
-    alert("A new OTP has been sent to your email.");
-    setTimer(180); // Reset timer to 3 minutes
-    setResendDisabled(true); // Disable resend button again
+  const resendOtp = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        `http://localhost:8000/api/v1/auth/resendotp`
+      ); // Replace with your actual resend OTP endpoint
+      if (response.data.success) {
+        alert("A new OTP has been sent to your email.");
+        setTimer(30); // Reset timer to 30 seconds
+        setResendDisabled(true); // Disable resend button again
+      } else {
+        alert(
+          response.data.message ||
+            "There was an error resending the OTP. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Error resending OTP:",
+        error.response ? error.response.data : error.message
+      );
+      alert("There was an error resending the OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatTime = () => {
-    const minutes = Math.floor(timer / 60);
+    const minutes = Math.floor(timer / 60); // 60 seconds per minute
     const seconds = timer % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
@@ -100,9 +135,7 @@ const OtpPage = () => {
                 <button
                   onClick={resendOtp}
                   disabled={resendDisabled}
-                  className={`text-blue-500 ${
-                    resendDisabled ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                  className={`text-blue-500 ${resendDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   Resend
                 </button>

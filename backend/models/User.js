@@ -8,9 +8,10 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
-    verificationCode: { type: String }, // Correct this line
+    verificationCode: { type: String }, // Field for storing OTP
+    verificationCodeExpires: { type: Date }, // Field for OTP expiration time
   },
-  { timestamps: true }
+  { timestamps: true } // Adds createdAt and updatedAt timestamps automatically
 );
 
 const User = mongoose.model("User", UserSchema);

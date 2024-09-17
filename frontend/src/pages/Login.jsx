@@ -41,8 +41,8 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        alert("An OTP has been sent to your mail");
-        navigate("/otp"); // Navigate to OTP Page
+        alert("Login Successful");
+        navigate("/dashboard"); // Navigate to OTP Page
       }
     } catch (error) {
       console.error("Login error:", error);
