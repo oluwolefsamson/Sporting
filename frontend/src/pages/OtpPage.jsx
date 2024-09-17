@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import Logo from "../assets/images/logo.png";
 import LoginImg from "../assets/images/login.png";
-import GithubIcon from "../assets/images/apple.jpg"; // Add GitHub image
-import GoogleIcon from "../assets/images/google.jpg"; // Add Google image
 
 const OtpPage = () => {
   const navigate = useNavigate();
