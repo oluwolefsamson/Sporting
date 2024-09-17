@@ -7,7 +7,7 @@ export default function Hero() {
     <div className="bg-white relative mt-[200px]">
       {/* Make the container relative for absolute positioning */}
       <div
-        className="rounded relative isolate px-6 py-3 align-center justify-center bg-blue-50 mx-11 lg:px-8 h-auto sm:h-auto lg:h-[800px]"
+        className="rounded relative isolate px-6 py-3 align-center justify-center bg-blue-100 mx-11 lg:px-8 h-auto sm:h-auto lg:h-[800px]"
         style={{ borderRadius: "20px" }} // Use height: auto for small screens, fixed height for large
       >
         <div className="mx-auto max-w-2xl py-6 sm:py-48 lg:py-20">

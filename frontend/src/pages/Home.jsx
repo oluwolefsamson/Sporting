@@ -7,7 +7,7 @@ import Cta from "../components/CTA/Cta";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-gray-50">
       <Hero />
       <Shopping />
       <Feature />
