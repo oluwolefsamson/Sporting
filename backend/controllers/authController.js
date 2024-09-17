@@ -1,9 +1,10 @@
-const User = require("../models/User"); // Import your User model
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js"; // Use the relative path to import the User model
+import { SendVerificationCode } from "../middleware/Email.js"; // Import the email function
 
 // Registration handler
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
 
   // Validate input
@@ -26,31 +27,30 @@ exports.register = async (req, res) => {
     // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    const verificationCode = Math.floor(900 + Math.random() * 900).toString();
 
     // Create new user
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
+      verificationCode,
     });
+    console.log("Request Body:", req.body);
 
     await newUser.save();
+    SendVerificationCode(newUser.email, verificationCode);
 
     // Return success response
-    res.status(201).json({ msg: "User registered successfully" });
+    res.status(201).json({ msg: "User registered successfully", newUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
   }
 };
 
-// Ensure JWT_SECRET is defined
-if (!process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET is not defined in the environment variables");
-}
-
 // Login handler
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   // Validate input
@@ -78,7 +78,7 @@ exports.login = async (req, res) => {
 
     // Return success response with token
     res.status(200).json({
-      msg: "Login successful",
+      msg: "Login successfully",
       token,
       user: {
         id: user._id,
@@ -89,5 +89,38 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
+  }
+};
+
+export const verifyEmail = async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    if (!code) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Verification code is required" });
+    }
+
+    // Find the user by verification code
+    const user = await User.findOne({ verificationCode: code });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or Expired Code" });
+    }
+
+    // Update user to mark as verified
+    user.isVerified = true;
+    user.verificationCode = null; // Clear the code after verification
+    await user.save();
+
+    // Respond with success
+    res
+      .status(200)
+      .json({ success: true, message: "Email verified successfully" });
+  } catch (error) {
+    console.error("Error verifying email:", error); // Improved error logging
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

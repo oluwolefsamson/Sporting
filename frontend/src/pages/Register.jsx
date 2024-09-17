@@ -33,7 +33,7 @@ const Register = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    console.log("Form Data:", formData); // Log formData for debugging
 
     setLoading(true);
     setError("");
@@ -56,7 +56,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `https://sporting.onrender.com/api/v1/auth/register`, // Ensure correct backend URL
+        `http://localhost:8000/api/v1/auth/register`, // Ensure the backend URL is correct
         formData,
         {
           headers: {
@@ -64,6 +64,8 @@ const Register = () => {
           },
         }
       );
+
+      console.log("Backend Response:", response.data); // Log backend response for debugging
 
       if (response.status === 201) {
         alert("User created successfully.");
